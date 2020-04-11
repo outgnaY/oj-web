@@ -1,0 +1,8 @@
+spring:
+  mail:
+    username: 2296176046@qq.com
+    password: aavcdohnbryddhih
+    host: smtp.qq.com
+
+server:
+  port: 8080
