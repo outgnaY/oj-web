@@ -3,6 +3,29 @@ spring:
     username: 2296176046@qq.com
     password: aavcdohnbryddhih
     host: smtp.qq.com
+  datasource:
+    url: jdbc:mysql://localhost:3306/oj?useSSL=false
+    username: root
+    password: 19961013
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 获取连接等待超时的时间
+      max-wait: 60000
+      # 间隔多久进行检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      # 一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      #PSCache
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.sjtu.oj.web.model
 
 server:
   port: 8080
