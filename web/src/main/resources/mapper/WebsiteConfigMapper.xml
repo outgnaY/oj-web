@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjtu.oj.web.mapper.WebsiteConfigMapper">
+    <resultMap id="websiteConfigResultMap" type="com.sjtu.oj.web.model.WebsiteConfig">
+        <result property="websiteName" column="website_name"/>
+    </resultMap>
+    <!--方法-->
+    <select id="getWebsiteConfig"
+            resultMap="websiteConfigResultMap"
+            useCache="true" >
+        SELECT * FROM oj_website_config LIMIT 1
+    </select>
+</mapper>

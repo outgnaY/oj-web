@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjtu.oj.web.mapper.LanguageInformationMapper">
+    <resultMap id="languageInformationResultMap" type="com.sjtu.oj.web.model.LanguageInformation">
+        <result property="languageName" column="language_name"/>
+        <result property="languageDescription" column="language_description"/>
+        <result property="compileCommand" column="compile_command"/>
+    </resultMap>
+    <!--方法-->
+    <select id="getLanguageInformations"
+            resultMap="languageInformationResultMap"
+            useCache="true" >
+        SELECT *
+        FROM language_information
+    </select>
+</mapper>

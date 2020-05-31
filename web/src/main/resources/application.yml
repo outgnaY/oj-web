@@ -3,6 +3,8 @@ spring:
     username: 2296176046@qq.com
     password: aavcdohnbryddhih
     host: smtp.qq.com
+  #resources:
+  # static-locations: classpath:/static/upload,classpath:/public
   datasource:
     url: jdbc:mysql://localhost:3306/oj?useSSL=false
     username: root
@@ -22,10 +24,12 @@ spring:
       #PSCache
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20
+  #mvc:
+  #  static-path-pattern: /static/**
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sjtu.oj.web.model
 
 server:
-  port: 8080
+  port: 8088
