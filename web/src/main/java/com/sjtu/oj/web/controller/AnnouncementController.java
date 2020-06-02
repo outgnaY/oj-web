@@ -2,6 +2,7 @@ package com.sjtu.oj.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sjtu.oj.web.service.AnnouncementService;
+import com.sjtu.oj.web.vo.AnnouncementListVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,7 @@ public class AnnouncementController {
     @Resource
     private AnnouncementService announcementService;
     @GetMapping("/get_page")
-    public JSONObject getAnnouncementList(@RequestParam int page, @RequestParam int pageSize) {
+    public AnnouncementListVO getAnnouncementList(@RequestParam int page, @RequestParam int pageSize) {
         return announcementService.getAnnouncementList(page, pageSize);
     }
 

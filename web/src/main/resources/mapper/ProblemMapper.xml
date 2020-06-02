@@ -3,11 +3,43 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sjtu.oj.web.mapper.ProblemMapper">
+    <resultMap id="problemResultMap" type="com.sjtu.oj.web.model.Problem">
+        <result property="problemId" column="problem_id"/>
+        <result property="problemTitle" column="problem_title"/>
+        <result property="problemDescription" column="problem_description"/>
+        <result property="problemInputDescription" column="problem_input_description"/>
+        <result property="problemOutputDescription" column="problem_output_description"/>
+        <result property="problemSamples" column="problem_samples"/>
+        <result property="problemTestCaseScore" column="problem_testcase_score"/>
+        <result property="problemHint" column="problem_hint"/>
+        <result property="problemCreateTime" column="problem_create_time"/>
+        <result property="problemLastUpdate" column="problem_last_update"/>
+        <result property="problemCreateBy" column="problem_create_by"/>
+        <result property="problemTimeLimit" column="problem_time_limit"/>
+        <result property="problemMemoryLimit" column="problem_memory_limit"/>
+        <result property="problemAC" column="problem_ac"/>
+        <result property="problemWA" column="problem_wa"/>
+    </resultMap>
     <!--方法-->
     <select id="getNumberOfProblems"
-            resultType="long"
+            resultType="int"
             useCache="true" >
         SELECT COUNT(*)
         FROM oj_problems
+    </select>
+    <select id="getProblemById"
+            resultMap="problemResultMap"
+            useCache="true">
+        SELECT * FROM oj_problems WHERE problem_id = #{id}
+    </select>
+    <select id="getProblemList"
+            resultMap="problemResultMap"
+            useCache="true">
+        SELECT * FROM oj_problems ORDER BY problem_id LIMIT #{currentIndex}, #{pageSize}
+    </select>
+    <select id="getProblemListByKeyword"
+            resultMap="problemResultMap"
+            useCache="true">
+        SELECT * FROM oj_problems WHERE problem_id LIKE concat('%', #{keyword}, '%') OR problem_title LIKE concat('%', #{keyword}, '%') ORDER BY problem_id
     </select>
 </mapper>

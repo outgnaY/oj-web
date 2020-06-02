@@ -47,28 +47,74 @@ INSERT INTO `announcements` (`title`, `content`) VALUES
 ('测试28', '测试内容28'),
 ('测试29', '测试内容29'),
 ('测试30', '测试内容30'),
-('测试31', '测试内容31'),
-('测试32', '测试内容32');
+('测试31', '测试内容31');
 
 # 题目数据表
 DROP TABLE IF EXISTS `oj_problems`;
 CREATE TABLE `oj_problems` (
     `problem_id` bigint(20) NOT NULL,
-    `problem_name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_time_limit` int(8) NOT NULL,
-    `problem_memory_limit` int(8) NOT NULL,
+    `problem_title` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
     `problem_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_input_format` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_output_format` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_sample_input` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_sample_output` text COLLATE utf8mb4_unicode_ci NOT NULL,
-    `problem_hint` text COLLATE utf8mb4_unicode_ci,
+    `problem_input_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    `problem_output_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    /* [{"input": "test1", "output": "123"}, {"input": "test2", "output": "456"}] */
+    `problem_samples` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    /* [{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}] */
+    `problem_testcase_score` text COLLATE utf8mb4_unicode_ci NOT NULL,
+    `problem_hint` text COLLATE utf8mb4_unicode_ci NULL,
+    `problem_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `problem_last_update` timestamp NOT NULL DEFAULT  CURRENT_TIMESTAMP,
+    /* TO CHANGE: foreign key */
+    `problem_create_by` varchar(128) NOT NULL DEFAULT 'root',
+    /* ms */
+    `problem_time_limit` int(8) NOT NULL,
+    /* MB */
+    `problem_memory_limit` int(8) NOT NULL,
+    `problem_ac` bigint(20) NOT NULL DEFAULT 0,
+    `problem_wa` bigint(20) NOT NULL DEFAULT 0,
     PRIMARY KEY(`problem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-# 测试数据
-INSERT INTO `oj_problems` (`problem_id`, `problem_name`, `problem_time_limit`, `problem_memory_limit`, `problem_description`, `problem_input_format`, `problem_output_format`, `problem_sample_input`, `problem_sample_output`, `problem_hint`) VALUES
-(1000, 'A+B Problem', 1000, 65536, '输入两个自然数, 输出他们的和', '两个自然数x和y (0<=x, y<=32767).', '一个数, 即x和y的和.', '123 500', '623', '## C++ Code\r\n\r\n    #include <iostream>\r\n\r\n    int main() {\r\n        int a = 0, b = 0;\r\n        std::cin >> a >> b;\r\n        std::cout << a + b << std::endl;\r\n        return 0;\r\n    }\r\n\r\n## Free Pascal Code\r\n\r\n    program Plus;\r\n    var a, b:longint;\r\n    begin\r\n        readln(a, b);\r\n        writeln(a + b);\r\n    end.\r\n\r\n## Java Code\r\n\r\n    import java.util.Scanner;\r\n\r\n    public class Main {\r\n        public static void main(String[] args) {\r\n            Scanner in = new Scanner(System.in);\r\n            int a = in.nextInt();\r\n            int b = in.nextInt();\r\n            System.out.println(a + b);\r\n        }\r\n    }\r\n');
 
+INSERT INTO oj_problems
+(`problem_id`, `problem_title`, `problem_description`, `problem_input_description`,
+ `problem_output_description`, `problem_samples`, `problem_testcase_score`,
+ `problem_create_by`, `problem_time_limit`, `problem_memory_limit`) VALUES
+(1000, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+'两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1001, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+    '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+    'root', '1000', '32'),
+(1002, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+    '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+    'root', '1000', '32'),
+(1003, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1004, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1005, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1006, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1007, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1008, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1009, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1010, 'A + B Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32'),
+(1011, 'C + D Problem', '请计算两个整数的和并输出结果\r\n请注意不要有不必要的输出。示例代码见隐藏部分', '两个用空格分开的整数',
+ '两数之和', '[{"input": "1 1", "output": "2"}, {"input": "2 2", "output": "4"}]', '[{"input_name": "1.in", "output_name": "1.out", "score": 40}, {"input_name": "2.in", "output_name": "2.out", "score": 60}]',
+ 'root', '1000', '32');
 # 测试点数据表
 DROP TABLE IF EXISTS `oj_problem_checkpoints`;
 CREATE TABLE `oj_problem_checkpoints` (

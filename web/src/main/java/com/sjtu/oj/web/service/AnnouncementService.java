@@ -1,9 +1,8 @@
 package com.sjtu.oj.web.service;
 
-
-import com.alibaba.fastjson.JSONObject;
 import com.sjtu.oj.web.mapper.AnnouncementMapper;
 import com.sjtu.oj.web.model.Announcement;
+import com.sjtu.oj.web.vo.AnnouncementListVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +30,7 @@ public class AnnouncementService {
     public int updateAnnouncement(long id, String title, Date lastUpdateTime, String content) {
         return announcementMapper.updateAnnouncement(id, title, lastUpdateTime, content);
     }
-    public JSONObject getAnnouncementList(int page, int pageSize) {
+    public AnnouncementListVO getAnnouncementList(int page, int pageSize) {
         int num = announcementMapper.getAnnouncementNum();
         int maxPage = num / pageSize;
         if(num % pageSize != 0) {
@@ -42,9 +41,6 @@ public class AnnouncementService {
             page = 1;
         }
         List<Announcement> list = announcementMapper.getAnnouncementList((page - 1) * pageSize, pageSize);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("data", list);
-        jsonObject.put("total", num);
-        return jsonObject;
+        return new AnnouncementListVO(list, num, page);
     }
 }

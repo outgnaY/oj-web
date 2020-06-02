@@ -31,10 +31,6 @@ public class TestController {
     public void send() {
         mailSenderUtil.test();
     }
-    @GetMapping("/problem")
-    public long getNumberOfProblems() {
-        return problemService.getNumberOfProblems();
-    }
     @GetMapping("/language")
     public List<LanguageInformation> getLanguageInformations() {
         return languageInformationService.getLanguageInformations();
