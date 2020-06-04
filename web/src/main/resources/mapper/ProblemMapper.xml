@@ -10,7 +10,7 @@
         <result property="problemInputDescription" column="problem_input_description"/>
         <result property="problemOutputDescription" column="problem_output_description"/>
         <result property="problemSamples" column="problem_samples"/>
-        <result property="problemTestCaseScore" column="problem_testcase_score"/>
+        <result property="problemTestcaseScore" column="problem_testcase_score"/>
         <result property="problemHint" column="problem_hint"/>
         <result property="problemCreateTime" column="problem_create_time"/>
         <result property="problemLastUpdate" column="problem_last_update"/>
@@ -19,6 +19,7 @@
         <result property="problemMemoryLimit" column="problem_memory_limit"/>
         <result property="problemAC" column="problem_ac"/>
         <result property="problemWA" column="problem_wa"/>
+        <result property="problemTestcaseId" column="problem_testcaseId"/>
     </resultMap>
     <!--方法-->
     <select id="getNumberOfProblems"
@@ -42,4 +43,36 @@
             useCache="true">
         SELECT * FROM oj_problems WHERE problem_id LIKE concat('%', #{keyword}, '%') OR problem_title LIKE concat('%', #{keyword}, '%') ORDER BY problem_id
     </select>
+    <delete id="deleteProblemById">
+        DELETE FROM oj_problems WHERE problem_id = #{id}
+    </delete>
+    <insert id="createProblem">
+        INSERT IGNORE INTO oj_problems
+            (problem_id, problem_title, problem_description,
+             problem_input_description, problem_output_description,
+             problem_samples, problem_testcase_score, problem_hint,
+             problem_create_time, problem_last_update, problem_create_by,
+             problem_time_limit, problem_memory_limit, problem_ac, problem_wa, problem_testcaseId)
+        VALUES
+            (#{problemId}, #{problemTitle}, #{problemDescription},
+             #{problemInputDescription}, #{problemOutputDescription},
+             #{problemSamples}, #{problemTestcaseScore}, #{problemHint},
+             #{problemCreateTime}, #{problemLastUpdate}, #{problemCreateBy},
+             #{problemTimeLimit}, #{problemMemoryLimit}, #{problemAC}, #{problemWA}, #{problemTestcaseId})
+    </insert>
+    <update id="updateProblem">
+        UPDATE oj_problems SET
+        problem_title = #{problemTitle},
+        problem_description = #{problemDescription},
+        problem_input_description = #{problemInputDescription},
+        problem_output_description = #{problemOutputDescription},
+        problem_samples = #{problemSamples},
+        problem_testcase_score = #{problemTestcaseScore},
+        problem_hint = #{problemHint},
+        problem_last_update = #{problemLastUpdate},
+        problem_time_limit = #{problemTimeLimit},
+        problem_memory_limit = #{problemMemoryLimit},
+        problem_testcaseId = #{problemTestcaseId}
+        WHERE problem_id = #{problemId}
+    </update>
 </mapper>

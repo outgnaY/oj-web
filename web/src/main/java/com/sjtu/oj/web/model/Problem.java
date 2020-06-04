@@ -51,12 +51,12 @@ public class Problem {
         this.problemSamples = problemSamples;
     }
 
-    public String getProblemTestCaseScore() {
-        return problemTestCaseScore;
+    public String getProblemTestcaseScore() {
+        return problemTestcaseScore;
     }
 
-    public void setProblemTestCaseScore(String problemTestCaseScore) {
-        this.problemTestCaseScore = problemTestCaseScore;
+    public void setProblemTestcaseScore(String problemTestcaseScore) {
+        this.problemTestcaseScore = problemTestcaseScore;
     }
 
     public String getProblemHint() {
@@ -123,13 +123,21 @@ public class Problem {
         this.problemWA = problemWA;
     }
 
+    public String getProblemTestcaseId() {
+        return problemTestcaseId;
+    }
+
+    public void setProblemTestcaseId(String problemTestcaseId) {
+        this.problemTestcaseId = problemTestcaseId;
+    }
+
     private long problemId;
     private String problemTitle;
     private String problemDescription;
     private String problemInputDescription;
     private String problemOutputDescription;
     private String problemSamples;
-    private String problemTestCaseScore;
+    private String problemTestcaseScore;
     private String problemHint;
     private Date problemCreateTime;
     private Date problemLastUpdate;
@@ -138,4 +146,5 @@ public class Problem {
     private int problemMemoryLimit;
     private long problemAC;
     private long problemWA;
+    private String problemTestcaseId;
 }
