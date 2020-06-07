@@ -1,9 +1,11 @@
 package com.sjtu.oj.web.config;
 
+import com.sjtu.oj.web.Interceptor.LoginInterceptor;
 import com.sjtu.oj.web.controller.admin.FileController;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -15,6 +17,21 @@ import java.util.Properties;
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
     private static Logger logger = Logger.getLogger(MvcConfig.class);
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/api/problem/**")
+                .excludePathPatterns("/api/announcement/**")
+                .excludePathPatterns("/public/**")
+                .excludePathPatterns("/api/send")
+                .excludePathPatterns("/api/language")
+                .excludePathPatterns("/api/websiteconfig")
+                .excludePathPatterns("/api/user/get_user")
+                .excludePathPatterns("/api/user/login")
+                .excludePathPatterns("/api/user/register")
+                .excludePathPatterns("/api/user/check_user")
+                .excludePathPatterns("/api/user/check_email");
+    }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         Properties properties = new Properties();

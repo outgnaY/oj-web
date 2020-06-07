@@ -16,6 +16,10 @@ import javax.annotation.Resource;
 public class ProblemController {
     @Resource
     private ProblemService problemService;
+    @GetMapping("/get_by_id")
+    public ResultVO getProblemById(@RequestParam long id) {
+        return problemService.getProblemById(id);
+    }
     @GetMapping("/get_num")
     public ResultVO getProblemNum() {
         return problemService.getNumberOfProblems();

@@ -19,7 +19,7 @@ public interface ProblemMapper {
                       String problemOutputDescription, String problemSamples, String problemTestcaseScore,
                       String problemHint, Date problemCreateTime, Date problemLastUpdate,
                       String problemCreateBy, int problemTimeLimit, int problemMemoryLimit,
-                      long problemAC, long problemWA, String problemTestcaseId);
+                      long problemAC, long problemTotal, String problemTestcaseId);
     int updateProblem(long problemId, String problemTitle, String problemDescription, String problemInputDescription,
                       String problemOutputDescription, String problemSamples, String problemTestcaseScore,
                       String problemHint, Date problemLastUpdate, int problemTimeLimit, int problemMemoryLimit, String problemTestcaseId);

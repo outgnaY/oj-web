@@ -8,6 +8,8 @@ import com.sjtu.oj.web.service.LanguageInformationService;
 import com.sjtu.oj.web.service.ProblemService;
 import com.sjtu.oj.web.service.WebsiteConfigService;
 import com.sjtu.oj.web.util.MailSenderUtil;
+import com.sjtu.oj.web.util.ResultVOUtil;
+import com.sjtu.oj.web.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,9 @@ import java.util.List;
 
 @RequestMapping("/api")
 @RestController
-public class TestController {
+public class CommonController {
     @Resource
     MailSenderUtil mailSenderUtil;
-    @Resource
-    ProblemService problemService;
     @Resource
     LanguageInformationService languageInformationService;
     @Resource
@@ -32,11 +32,11 @@ public class TestController {
         mailSenderUtil.test();
     }
     @GetMapping("/language")
-    public List<LanguageInformation> getLanguageInformations() {
-        return languageInformationService.getLanguageInformations();
+    public ResultVO getLanguageInformations() {
+        return ResultVOUtil.success("success", languageInformationService.getLanguageInformations());
     }
     @GetMapping("/websiteconfig")
-    public WebsiteConfig getWebsiteConfig() {
-        return websiteConfigService.getWebsiteConfig();
+    public ResultVO getWebsiteConfig() {
+        return ResultVOUtil.success("success", websiteConfigService.getWebsiteConfig());
     }
 }

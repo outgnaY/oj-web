@@ -5,6 +5,22 @@ CREATE TABLE `oj_website_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `oj_website_config` (`website_name`) VALUES
 ('Online Judge');
+# 用户
+DROP TABLE IF EXISTS `oj_user`;
+CREATE TABLE `oj_user` (
+    `username` varchar(128) NOT NULL,
+    /* 安全考虑，存md5散列后的密码 */
+    `password_md5` varchar(128) NOT NULL,
+    `email` varchar(128) NOT NULL,
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `user_type` varchar(128) NOT NULL DEFAULT 'NORMAL',
+    /* 是否被封号 */
+    `is_disabled` boolean DEFAULT false
+
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `oj_user` (`username`, `password_md5`, `email`, `user_type`) VALUES
+('admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@123.com', 'ADMIN'),
+('normal', 'e10adc3949ba59abbe56e057f20f883e', 'normal@123.com', 'NORMAL');
 # 公告表
 DROP TABLE IF EXISTS `announcements`;
 CREATE TABLE `announcements` (
@@ -71,7 +87,7 @@ CREATE TABLE `oj_problems` (
     /* MB */
     `problem_memory_limit` int(8) NOT NULL,
     `problem_ac` bigint(20) NOT NULL DEFAULT 0,
-    `problem_wa` bigint(20) NOT NULL DEFAULT 0,
+    `problem_total` bigint(20) NOT NULL DEFAULT 0,
     `problem_testcaseId` varchar(128) NOT NULL DEFAULT '',
     PRIMARY KEY(`problem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

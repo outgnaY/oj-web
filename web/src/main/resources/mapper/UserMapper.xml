@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjtu.oj.web.mapper.UserMapper">
+    <resultMap id="userResultMap" type="com.sjtu.oj.web.model.User">
+        <result property="username" column="username"/>
+        <result property="passwordMd5" column="password_md5"/>
+        <result property="email" column="email" />
+        <result property="createTime" column="create_time" />
+        <result property="userType" column="user_type" />
+        <result property="isDisabled" column="is_disabled" />
+    </resultMap>
+    <!--方法-->
+    <select id="getUser"
+            resultMap="userResultMap"
+            useCache="true">
+        SELECT * FROM oj_user WHERE username = #{username} AND password_md5 = #{passwordMd5}
+    </select>
+    <select id="getUserByUsername"
+            resultMap="userResultMap"
+            useCache="true">
+        SELECT * FROM oj_user WHERE username = #{username}
+    </select>
+    <insert id="registerUser">
+        INSERT IGNORE INTO oj_user
+            (username, password_md5, email)
+        VALUES
+            (#{username}, #{passwordMd5}, #{email})
+    </insert>
+    <select id="getExistByUsername"
+            resultType="int"
+            useCache="true">
+        SELECT COUNT(*) FROM oj_user WHERE username = #{username} LIMIT 1
+    </select>
+    <select id="getExistByEmail"
+            resultType="int"
+            useCache="true">
+        SELECT COUNT(*) FROM oj_user WHERE email = #{email} LIMIT 1
+    </select>
+
+</mapper>

@@ -2,6 +2,7 @@ package com.sjtu.oj.web.service;
 
 import com.sjtu.oj.web.mapper.AnnouncementMapper;
 import com.sjtu.oj.web.model.Announcement;
+import com.sjtu.oj.web.util.Constants;
 import com.sjtu.oj.web.util.ResultVOUtil;
 import com.sjtu.oj.web.vo.AnnouncementListVO;
 import com.sjtu.oj.web.vo.ResultVO;
@@ -27,7 +28,7 @@ public class AnnouncementService {
             return ResultVOUtil.success("success", announcement);
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_ANNOUNCEMENT, "error");
         }
     }
     public ResultVO deleteAnnouncementById(long id) {
@@ -36,7 +37,7 @@ public class AnnouncementService {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_ANNOUNCEMENT, "error");
         }
     }
     public ResultVO createAnnouncement(String title, Date createTime, Date lastUpdateTime, String createBy, String content) {
@@ -45,7 +46,7 @@ public class AnnouncementService {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_ANNOUNCEMENT, "error");
         }
     }
     public ResultVO updateAnnouncement(long id, String title, Date lastUpdateTime, String content) {
@@ -54,7 +55,7 @@ public class AnnouncementService {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_ANNOUNCEMENT, "error");
         }
     }
     public ResultVO getAnnouncementList(int page, int pageSize) {

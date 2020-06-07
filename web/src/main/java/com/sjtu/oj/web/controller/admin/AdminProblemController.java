@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sjtu.oj.web.model.Problem;
 import com.sjtu.oj.web.model.TestcaseInfo;
 import com.sjtu.oj.web.service.ProblemService;
+import com.sjtu.oj.web.util.Constants;
 import com.sjtu.oj.web.util.FileUpload;
 import com.sjtu.oj.web.util.ResultVOUtil;
 import com.sjtu.oj.web.vo.ProblemListVO;
@@ -51,7 +52,7 @@ public class AdminProblemController {
             return ResultVOUtil.success("success", testcaseUploadVO);
         }
         else {
-            return ResultVOUtil.error("error", testcaseUploadVO);
+            return ResultVOUtil.error(Constants.ERROR_CODE_TESTCASE_UPLOAD, "error", testcaseUploadVO);
         }
     }
     @PostMapping("/create")

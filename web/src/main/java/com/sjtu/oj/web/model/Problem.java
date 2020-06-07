@@ -115,12 +115,12 @@ public class Problem {
         this.problemAC = problemAC;
     }
 
-    public long getProblemWA() {
-        return problemWA;
+    public long getProblemTotal() {
+        return problemTotal;
     }
 
-    public void setProblemWA(long problemWA) {
-        this.problemWA = problemWA;
+    public void setProblemTotal(long problemTotal) {
+        this.problemTotal = problemTotal;
     }
 
     public String getProblemTestcaseId() {
@@ -145,6 +145,6 @@ public class Problem {
     private int problemTimeLimit;
     private int problemMemoryLimit;
     private long problemAC;
-    private long problemWA;
+    private long problemTotal;
     private String problemTestcaseId;
 }

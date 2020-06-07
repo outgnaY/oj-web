@@ -18,15 +18,14 @@
         <result property="problemTimeLimit" column="problem_time_limit"/>
         <result property="problemMemoryLimit" column="problem_memory_limit"/>
         <result property="problemAC" column="problem_ac"/>
-        <result property="problemWA" column="problem_wa"/>
+        <result property="problemTotal" column="problem_total"/>
         <result property="problemTestcaseId" column="problem_testcaseId"/>
     </resultMap>
     <!--方法-->
     <select id="getNumberOfProblems"
             resultType="int"
             useCache="true" >
-        SELECT COUNT(*)
-        FROM oj_problems
+        SELECT COUNT(*) FROM oj_problems
     </select>
     <select id="getProblemById"
             resultMap="problemResultMap"
@@ -52,13 +51,13 @@
              problem_input_description, problem_output_description,
              problem_samples, problem_testcase_score, problem_hint,
              problem_create_time, problem_last_update, problem_create_by,
-             problem_time_limit, problem_memory_limit, problem_ac, problem_wa, problem_testcaseId)
+             problem_time_limit, problem_memory_limit, problem_ac, problem_total, problem_testcaseId)
         VALUES
             (#{problemId}, #{problemTitle}, #{problemDescription},
              #{problemInputDescription}, #{problemOutputDescription},
              #{problemSamples}, #{problemTestcaseScore}, #{problemHint},
              #{problemCreateTime}, #{problemLastUpdate}, #{problemCreateBy},
-             #{problemTimeLimit}, #{problemMemoryLimit}, #{problemAC}, #{problemWA}, #{problemTestcaseId})
+             #{problemTimeLimit}, #{problemMemoryLimit}, #{problemAC}, #{problemTotal}, #{problemTestcaseId})
     </insert>
     <update id="updateProblem">
         UPDATE oj_problems SET

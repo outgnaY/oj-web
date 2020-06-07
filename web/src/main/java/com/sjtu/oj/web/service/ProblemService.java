@@ -2,6 +2,7 @@ package com.sjtu.oj.web.service;
 
 import com.sjtu.oj.web.mapper.ProblemMapper;
 import com.sjtu.oj.web.model.Problem;
+import com.sjtu.oj.web.util.Constants;
 import com.sjtu.oj.web.util.ResultVOUtil;
 import com.sjtu.oj.web.vo.ProblemListVO;
 import com.sjtu.oj.web.vo.ResultVO;
@@ -27,7 +28,7 @@ public class ProblemService {
             return ResultVOUtil.success("success", problem);
         }
         else {
-            return ResultVOUtil.error("error", problem);
+            return ResultVOUtil.error(Constants.ERROR_CODE_PROBLEM, "error", problem);
         }
     }
     public ResultVO getProblemList(int page, int pageSize) {
@@ -65,24 +66,24 @@ public class ProblemService {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_PROBLEM, "error");
         }
     }
     public ResultVO createProblem(long problemId, String problemTitle, String problemDescription, String problemInputDescription,
                              String problemOutputDescription, String problemSamples, String problemTestcaseScore,
                              String problemHint, Date problemCreateTime, Date problemLastUpdate,
                              String problemCreateBy, int problemTimeLimit, int problemMemoryLimit,
-                             long problemAC, long problemWA, String problemTestcaseId) {
+                             long problemAC, long problemTotal, String problemTestcaseId) {
         int affect = problemMapper.createProblem(problemId, problemTitle, problemDescription, problemInputDescription,
                 problemOutputDescription, problemSamples, problemTestcaseScore,
                 problemHint, problemCreateTime, problemLastUpdate,
                 problemCreateBy, problemTimeLimit, problemMemoryLimit,
-                problemAC, problemWA, problemTestcaseId);
+                problemAC, problemTotal, problemTestcaseId);
         if(affect == 1) {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_PROBLEM, "error");
         }
     }
     public ResultVO updateProblem(long problemId, String problemTitle, String problemDescription, String problemInputDescription,
@@ -95,7 +96,7 @@ public class ProblemService {
             return ResultVOUtil.success("success");
         }
         else {
-            return ResultVOUtil.error("error");
+            return ResultVOUtil.error(Constants.ERROR_CODE_PROBLEM, "error");
         }
     }
 }
